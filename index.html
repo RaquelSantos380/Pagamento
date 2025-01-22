@@ -1,211 +1,105 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagamento via PIX - Adopt Me</title>
-    <link rel="icon" href="Raky.jpg" type="image/jpg">
-    
-    <!-- Fontes do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
+    <title>Realizar o Pagamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Fontes e estilos globais */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #ffe4f2; /* Rosa claro */
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
-            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #444;
         }
         .container {
-            max-width: 900px;
-            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             padding: 30px;
-            background-color: white;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1, h2 {
-            font-family: 'Playfair Display', serif;
-            color: #c2185b;
             text-align: center;
-            font-size: 38px;
-            letter-spacing: 1.5px;
-            font-weight: bold;
+            width: 90%;
+            max-width: 400px;
         }
-        p, button, input, textarea {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
+        h1 {
+            color: #ff6f61;
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
         }
-        .payment-method, .button-research, .copy-button, .contact-form button {
-            background-color: #ff80ab;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        button {
+            background-color: #ff77a8;
             color: white;
+            border: none;
             padding: 12px 25px;
-            font-size: 20px;
-            border-radius: 8px;
+            border-radius: 30px;
             cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.1s;
         }
-        .payment-method:hover, .button-research:hover, .copy-button:hover, .contact-form button:hover {
-            background-color: #f06292;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        button:hover {
+            background-color: #ff5a8e;
         }
-        .email, .phone {
-            font-weight: bold;
-            color: #d32f2f;
-            font-size: 20px;
-            margin-top: 10px;
+        button:active {
+            transform: scale(0.95);
         }
-        .instructions {
+        .pix-keys {
+            display: none;
             margin-top: 20px;
-            font-size: 18px;
-            color: #555;
-        }
-        .calculator {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            text-align: left;
             border-radius: 8px;
-        }
-        .calc-button {
-            font-size: 18px;
             padding: 10px;
-            margin: 5px;
-            width: 50px;
-            height: 50px;
+            background-color: #fce4ec;
+            border: 1px solid #ff77a8;
+        }
+        .pix-keys p {
+            background-color: #fff;
+            padding: 10px;
             border-radius: 5px;
-            background-color: #ffc4e3;
-            color: #333;
-            border: none;
-            cursor: pointer;
+            margin: 5px 0;
+            border: 1px solid #ff77a8;
         }
-        .calc-button:hover {
-            background-color: #ff99cc;
+        .contact-btn {
+            margin-top: 20px;
         }
-        .button-equal {
-            background-color: #ff4081;
+        .contact-btn a {
+            text-decoration: none;
             color: white;
-        }
-        .button-equal:hover {
-            background-color: #e91e63;
-        }
-        #calcInput {
-            width: calc(100% - 20px);
-            height: 50px;
-            font-size: 18px;
-            text-align: right;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        .button-receive {
-            display: block;
-            margin: 30px auto 0;
-            background-color: #4caf50;
-            color: white;
-            padding: 15px 30px;
-            font-size: 20px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .button-receive:hover {
-            background-color: #388e3c;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Pagamento via PIX</h1>
-        <div class="content">
-            <p>Aguardando o pagamento ser realizado. Escreva o valor e calcule.</p>
-            <p>Em caso de dúvidas dos valores, consulte nosso site de pesquisa:</p>
-            
-            <!-- Botão de pesquisa -->
-            <button class="button-research" onclick="window.open('https://raquelsantos380.github.io/Pesquisa-de-valores-do-Adopt-me/', '_blank')">Site de Pesquisas</button>
-            
-            <p>Nosso site não possui estrutura para carrinho, mas você pode calcular os valores:</p>
-            
-            <!-- Calculadora simulada -->
-            <div class="calculator">
-                <h3>Calculadora de Valores</h3>
-                <input type="text" id="calcInput" readonly />
-                <div>
-                    <button class="calc-button" onclick="appendToCalculator('7')">7</button>
-                    <button class="calc-button" onclick="appendToCalculator('8')">8</button>
-                    <button class="calc-button" onclick="appendToCalculator('9')">9</button>
-                    <button class="calc-button" onclick="appendToCalculator('+')">+</button>
-                </div>
-                <div>
-                    <button class="calc-button" onclick="appendToCalculator('4')">4</button>
-                    <button class="calc-button" onclick="appendToCalculator('5')">5</button>
-                    <button class="calc-button" onclick="appendToCalculator('6')">6</button>
-                    <button class="calc-button" onclick="appendToCalculator('-')">-</button>
-                </div>
-                <div>
-                    <button class="calc-button" onclick="appendToCalculator('1')">1</button>
-                    <button class="calc-button" onclick="appendToCalculator('2')">2</button>
-                    <button class="calc-button" onclick="appendToCalculator('3')">3</button>
-                    <button class="calc-button" onclick="appendToCalculator('×')">×</button>
-                </div>
-                <div>
-                    <button class="calc-button" onclick="appendToCalculator('0')">0</button>
-                    <button class="calc-button" onclick="clearCalculator()">C</button>
-                    <button class="calc-button button-equal" onclick="calculate()">=</button>
-                    <button class="calc-button" onclick="appendToCalculator('/')">/</button>
-                </div>
-            </div>
-            
-            <p id="calcResult">Resultado: </p>
-            
-            <p>Utilize a chave PIX para realizar o pagamento:</p>
-            <p class="email">raquelgata780@gmail.com</p>
-            <p class="phone">62992900737</p>
-            
-            <!-- Botão de copiar chave PIX -->
-            <button class="copy-button" onclick="copyPix()">Copiar Chave PIX</button>
-            
-            <p class="instructions">Abra seu app bancário, escolha "Pagar com PIX" e insira a chave acima.</p>
-
-            <!-- Botão para acessar após pagamento -->
-            <button class="button-receive" onclick="window.open('https://rakyofficialstore.wordpress.com/como-receber/', '_blank')">Receber após o pagamento</button>
+        <h1>Realizar o Pagamento</h1>
+        <button id="showPixButton">Clique aqui para ver as chaves Pix</button>
+        <div class="pix-keys" id="pixKeys">
+            <p>PagBank: <strong>62992900737</strong></p>
+            <p>Mercado Pago: <strong>raquelgata780@gmail.com</strong></p>
+            <p>PicPay: <strong>raquelgata380@gmail.com</strong></p>
+        </div>
+        <div class="contact-btn">
+            <a href="https://api.whatsapp.com/send?phone=5562992900737&text=Converse%20com%20a%20Raky%20diretamente%20%21%20Para%20realizar%20o%20pagamento%20 💬 😊3A" target="_blank">
+                <button>Contato</button>
+            </a>
         </div>
     </div>
 
     <script>
-        let calcInput = "";
-
-        function appendToCalculator(value) {
-            calcInput += value;
-            document.getElementById("calcInput").value = calcInput;
-        }
-
-        function clearCalculator() {
-            calcInput = "";
-            document.getElementById("calcInput").value = "";
-            document.getElementById("calcResult").innerText = "Resultado: ";
-        }
-
-        function calculate() {
-            try {
-                const result = eval(calcInput.replace('×', '*'));
-                document.getElementById("calcResult").innerText = "Resultado: " + result;
-            } catch {
-                document.getElementById("calcResult").innerText = "Erro de cálculo!";
-            }
-        }
-
-        function copyPix() {
-            const pixKey = "raquelgata780@gmail.com";
-            navigator.clipboard.writeText(pixKey).then(() => alert("Chave PIX copiada!"));
-        }
+        document.getElementById('showPixButton').addEventListener('click', function() {
+            const pixKeys = document.getElementById('pixKeys');
+            pixKeys.style.display = pixKeys.style.display === 'none' || pixKeys.style.display === '' ? 'block' : 'none';
+        });
     </script>
 </body>
 </html>
